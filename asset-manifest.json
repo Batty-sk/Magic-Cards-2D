@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Magic-Cards-2D/static/css/main.4a4fa60d.css",
+    "main.js": "/Magic-Cards-2D/static/js/main.a7724817.js",
+    "static/media/card-pattern-stylish.png": "/Magic-Cards-2D/static/media/card-pattern-stylish.682f152a98464dcb526a.png",
+    "static/media/card1.png": "/Magic-Cards-2D/static/media/card1.bf6cf8796f2a50611adf.png",
+    "static/media/card3.png": "/Magic-Cards-2D/static/media/card3.5335ed13d9a5ec423873.png",
+    "static/media/card2.png": "/Magic-Cards-2D/static/media/card2.e92b493990c79b22454c.png",
+    "static/media/card4.png": "/Magic-Cards-2D/static/media/card4.de550f3d0a4d51aa8ac5.png",
+    "index.html": "/Magic-Cards-2D/index.html",
+    "main.4a4fa60d.css.map": "/Magic-Cards-2D/static/css/main.4a4fa60d.css.map",
+    "main.a7724817.js.map": "/Magic-Cards-2D/static/js/main.a7724817.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4a4fa60d.css",
+    "static/js/main.a7724817.js"
+  ]
+}
