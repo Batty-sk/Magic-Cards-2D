@@ -336,7 +336,8 @@ function Home()
                                 </span>
                         </div>
                         <div className="col-12 mt-5 card-col-parent">
-                            <div className="row justify-content-evenly card-parent">
+                            <div className="row justify-content-evenly align-items-md-center card-parent">
+                                    
                                     <Card pattern={card} back={card1} id={'co-1'} plrselect={playerSelection} id2={'c-1'}></Card>
                                     <Card pattern={card} back={card2} id={'co-2'} plrselect={playerSelection} id2={'c-2'}></Card>
                                     <Card pattern={card} back={card3} id={'co-3'} plrselect={playerSelection} id2={'c-3'} ></Card>
