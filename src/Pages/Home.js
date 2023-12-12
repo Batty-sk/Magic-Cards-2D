@@ -1,4 +1,5 @@
 import Header from "../Components/Header"
+import ConfettiGenerator from 'confetti-js';
 
 import './Home.css'
 import card from '../card-pattern-stylish.png'
@@ -38,6 +39,11 @@ function Home()
         Choose_card=0;
         player_choice=null
         GameOver(0)
+        const confetti = document.getElementById('confetti-canvas');
+         if (confetti) {
+              confetti.parentNode.removeChild(confetti); // Remove the canvas
+        }
+          
         setPlayGroundHeading("Pick Up Any Card To Start")
         addHoverClass()
 
@@ -80,7 +86,7 @@ function Home()
                 outerCard[0].classList.remove('outer-parent');
 
                 // countdown for 3 seconds
-                let count=3;
+                let count=2;
                 let countinterval=setInterval(function()
                 {
                     if (count>=0)
@@ -108,10 +114,12 @@ function Home()
                 if(player_choice ==  whichclicked.currentTarget.id)
                 {
                     setPlayGroundHeading("<><><><> YOU'VE WON <><><><>")
+                    Celebration()
                 }
                 else{
                     setPlayGroundHeading("<><><><> YOU'VE WEAK EYES <><><><>")
                 }
+
 
                 Show_Cards();
                 setTimeout(
@@ -245,6 +253,26 @@ function Home()
             return Math.floor(Math.random()*(4-1 +1))+1;
         }
 
+
+
+        const Celebration=()=>{
+            const canvas = document.createElement('canvas');
+            canvas.id = 'confetti-canvas'; // Set an ID for the canvas
+            canvas.style.position="absolute"
+            canvas.style.top=0
+            canvas.style.left=0
+            canvas.style.right=0
+            canvas.style.bottom=0
+            canvas.style.height='100%'
+            canvas.style.width='100%';
+            canvas.style.pointerEvents = 'none';
+            document.body.appendChild(canvas); // Append the canvas to the body or another container
+          
+            // Configure ConfettiGenerator settings
+            const confettiSettings = { target: 'confetti-canvas' ,max: 300,}; // Use the ID of the canvas
+            const confetti = new ConfettiGenerator(confettiSettings);
+            confetti.render();
+        }   
     
     //we have to make the card component
     return(
@@ -291,6 +319,8 @@ function Home()
                                     <Card pattern={card} back={card4} id={'co-4'} plrselect={playerSelection} id2={'c-4'}></Card>
                             </div>
                         </div>
+                        
+           
                     </div>
                 </div>
             </section>
