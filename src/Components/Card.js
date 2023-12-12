@@ -1,3 +1,4 @@
+
 function Card(props){
     return (
         <div className="col-2 card-space" id={props.id} onClick={props.plrselect}> 

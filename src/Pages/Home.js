@@ -10,6 +10,8 @@ import card3 from '../card3.png'
 import card4 from '../card4.png'
 import Card from "../Components/Card"
 
+
+
 import {useState,useRef } from "react"
 
 const DIFFICULY_LEVELS_COLORS={'lvl1':'#008b8b','lvl2':'#025F5F','lvl3':'#003535','lvl4':'#D00707'}
@@ -52,7 +54,7 @@ function Home()
         audioRef.current.pause();
         audioRef.current.currentTime = 0
         setPlayGroundHeading("Pick Up Any Card To Start")
-        addHoverClass()
+        addHoverClass()                   
 
     }
 
@@ -75,6 +77,7 @@ function Home()
         {
             ele=document.getElementById(arr[i]);
             ele.classList.add('outer-parent')
+
             let backEle=ele.getElementsByClassName('card-back');
             backEle[0].classList.add('card-transform-back');
             ele.classList.remove('static-card-hover')
@@ -109,6 +112,13 @@ function Home()
                         outerCard[0].classList.add('outer-parent')
                         console.log(parentEle.getBoundingClientRect())     
                         clearInterval(countinterval);
+                        for(let i=0;i<arr.length;i++)
+                        {
+                            let parentEle=document.getElementById(arr[i]);
+                            parentEle.classList.remove('outer-parent')
+                            
+                
+                        }
                         Swap();
                     }
                 },1000)}
@@ -194,6 +204,8 @@ function Home()
             {
                 document.getElementById(arr[t]).style.transitionDuration=`${DIFFICULTY_LEVELS_SPEED[difficulty_level-1]}ms`
             }
+
+
 
            let Swap_interval=setInterval(function(){
             if(no1!==no2){//3,1
