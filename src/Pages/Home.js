@@ -1,5 +1,6 @@
 import Header from "../Components/Header"
 import ConfettiGenerator from 'confetti-js';
+import Caudio from "../assests/u-got-that-meme.mp3"
 
 import './Home.css'
 import card from '../card-pattern-stylish.png'
@@ -9,7 +10,7 @@ import card3 from '../card3.png'
 import card4 from '../card4.png'
 import Card from "../Components/Card"
 
-import { useEffect, useState } from "react"
+import {useState,useRef } from "react"
 
 const DIFFICULY_LEVELS_COLORS={'lvl1':'#008b8b','lvl2':'#025F5F','lvl3':'#003535','lvl4':'#D00707'}
 const DIFFICULTY_LEVELS_SPEED=[900,600,400,200];
@@ -22,6 +23,7 @@ function Home()
 {
        
   
+
     console.log('*****************************************************************')
 
     const [playGroundHeading,setPlayGroundHeading]=useState('Pick Up Any Card To Start') // using dom api to manuplate this cuz i was a beginner at that time haha
@@ -31,6 +33,9 @@ function Home()
 
     const[difficulty_level,setDifficultyLvl]=useState(1)
     const[playagain,GameOver]=useState(0);
+    const audioRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+  
 
 
     function PlayAgain()
@@ -44,6 +49,8 @@ function Home()
               confetti.parentNode.removeChild(confetti); // Remove the canvas
         }
           
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0
         setPlayGroundHeading("Pick Up Any Card To Start")
         addHoverClass()
 
@@ -115,6 +122,7 @@ function Home()
                 {
                     setPlayGroundHeading("<><><><> YOU'VE WON <><><><>")
                     Celebration()
+                    audioRef.current.play();
                 }
                 else{
                     setPlayGroundHeading("<><><><> YOU'VE WEAK EYES <><><><>")
@@ -274,6 +282,10 @@ function Home()
             confetti.render();
         }   
     
+        const handlePause = () => {
+            audioRef.current.pause();
+            setIsPlaying(false);
+          };
     //we have to make the card component
     return(
         <>
@@ -320,8 +332,12 @@ function Home()
                             </div>
                         </div>
                         
-           
-                    </div>
+                        <div >
+      <audio ref={audioRef} onEnded={handlePause}>
+        <source src={Caudio} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio></div>
+       </div>
                 </div>
             </section>
         </section>
