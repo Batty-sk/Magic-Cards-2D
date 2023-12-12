@@ -7,6 +7,7 @@ import card2 from '../card2.png'
 import card3 from '../card3.png'
 import card4 from '../card4.png'
 import Card from "../Components/Card"
+
 import { useEffect, useState } from "react"
 
 function Home()
@@ -16,21 +17,25 @@ function Home()
     let Choose_card=0
     let player_choice=null;
     console.log('*****************************************************************')
-    // only problem is difficulty leel
-    let difficulty_level=1;
-    const[playagain,GameOver]=useState(0);
     let DIFFICULTY_LEVELS_SPEED=[900,600,400,200];
     let DIFFICULTY_LEVELS_SWAPS=[5,8,10,20];
-    let DIFFICULY_LEVELS_COLORS={'lvl1':'darkcyan','lvl2':'rgb(2, 95, 95)','lvl3':'rgb(0, 53, 53)','lvl4':'rgb(208, 7, 7)'}
+    let DIFFICULY_LEVELS_COLORS={'lvl1':'#008b8b','lvl2':'#025F5F','lvl3':'#003535','lvl4':'#D00707'}
     let countdown=document.getElementById('play-ground-heading')
     let arr=['c-1','c-2','c-3','c-4']
-    
+    // only problem is difficulty leel
+
+    const[difficulty_level,setDifficultyLvl]=useState(1)
+    const[playagain,GameOver]=useState(0);
+
+
     useEffect(()=>{
-        difficulty_level=pre_difficulty
+        setDifficultyLvl(pre_difficulty) // why do we need to change it bro ?
         console.log(difficulty_level);
     },[playagain])
 
     let pre_difficulty=difficulty_level;
+
+
     function PlayAgain()
     {
         First_time=1;
@@ -39,17 +44,21 @@ function Home()
         GameOver(0)
         countdown.innerText="Pick Up Any Card To Start"
         addHoverClass()
+
     }
+
     const setDifficulty=(difficultylevel)=>{
-        let element=document.getElementById(difficultylevel.currentTarget.id);
-        element.style.backgroundColor=DIFFICULY_LEVELS_COLORS[difficultylevel.currentTarget.id]
-        while(element.previousSibling)
+        console.log('difficulty level selected',difficultylevel)
+        setDifficultyLvl(difficultylevel)
+    /*     while(element.previousSibling)
         {
             element.previousSibling.style.backgroundColor=DIFFICULY_LEVELS_COLORS[element.previousSibling.id];
             element=element.previousSibling;
             difficulty_level+=1;
-        }
+        } */
     }
+
+
     const addHoverClass=()=>
     {
         let ele;
@@ -62,6 +71,7 @@ function Home()
             ele.classList.remove('static-card-hover')
         }
     }
+
     const playerSelection=(whichclicked)=>{
         if(First_time)
            {
@@ -233,6 +243,7 @@ function Home()
            },speed)
            
         }
+
         function Get_Random()
         {
             return Math.floor(Math.random()*(4-1 +1))+1;
@@ -265,10 +276,15 @@ function Home()
                         <div className="col-12 text-center mt-3">
                                 <span>Difficulty Level:</span>
                                     <span id="levels">
-                                    <div id="lvl1" onClick={setDifficulty}></div>
-                                    <div id="lvl2" onClick={setDifficulty}></div>
-                                    <div id="lvl3" onClick={setDifficulty}></div>
-                                    <div id="lvl4" onClick={setDifficulty}></div>
+                                        {['lvl1','lvl2','lvl3','lvl4'].map((x,i)=>{
+                                            if(i+1 <= difficulty_level){
+                                                return <div style={{background:`${DIFFICULY_LEVELS_COLORS[x]}`}} onClick={()=>setDifficulty(i+1)}  className={`hover:bg-[${DIFFICULY_LEVELS_COLORS[x]}]`} key={i}></div>
+                                            }
+                                            else{
+                                                return <div onClick={()=>setDifficulty(i+1)} className={`hover:bg-[${DIFFICULY_LEVELS_COLORS[x]}]`} key={i}></div>
+                                            }
+
+                                        }  )  }
                                 </span>
                         </div>
                         <div className="col-12 mt-5 card-col-parent">
@@ -283,6 +299,7 @@ function Home()
                 </div>
             </section>
         </section>
+
         </>
     )
 }

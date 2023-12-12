@@ -126,18 +126,3 @@ img{
 #levels div:hover{
     cursor: pointer;
 }
-#levels #lvl1:hover{
-    background-color: darkcyan;
-}
-#levels #lvl1{
-    background-color: darkcyan;
-}
-#levels #lvl2:hover{
-    background-color: rgb(2, 95, 95);
-}
-#levels #lvl3:hover{
-    background-color: rgb(0, 53, 53);
-}
-#levels #lvl4:hover{
-    background-color: rgb(208, 7, 7);
-}
