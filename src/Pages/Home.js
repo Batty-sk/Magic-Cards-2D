@@ -10,30 +10,26 @@ import Card from "../Components/Card"
 
 import { useEffect, useState } from "react"
 
+const DIFFICULY_LEVELS_COLORS={'lvl1':'#008b8b','lvl2':'#025F5F','lvl3':'#003535','lvl4':'#D00707'}
+const DIFFICULTY_LEVELS_SPEED=[900,600,400,200];
+const DIFFICULTY_LEVELS_SWAPS=[5,8,10,20];
+let First_time=1;
+let Choose_card=0
+let player_choice=null;
+
 function Home()
 {
        
-    let First_time=1;
-    let Choose_card=0
-    let player_choice=null;
+  
     console.log('*****************************************************************')
-    let DIFFICULTY_LEVELS_SPEED=[900,600,400,200];
-    let DIFFICULTY_LEVELS_SWAPS=[5,8,10,20];
-    let DIFFICULY_LEVELS_COLORS={'lvl1':'#008b8b','lvl2':'#025F5F','lvl3':'#003535','lvl4':'#D00707'}
-    let countdown=document.getElementById('play-ground-heading')
+
+    const [playGroundHeading,setPlayGroundHeading]=useState('Pick Up Any Card To Start') // using dom api to manuplate this cuz i was a beginner at that time haha
+    
     let arr=['c-1','c-2','c-3','c-4']
     // only problem is difficulty leel
 
     const[difficulty_level,setDifficultyLvl]=useState(1)
     const[playagain,GameOver]=useState(0);
-
-
-    useEffect(()=>{
-        setDifficultyLvl(pre_difficulty) // why do we need to change it bro ?
-        console.log(difficulty_level);
-    },[playagain])
-
-    let pre_difficulty=difficulty_level;
 
 
     function PlayAgain()
@@ -42,7 +38,7 @@ function Home()
         Choose_card=0;
         player_choice=null
         GameOver(0)
-        countdown.innerText="Pick Up Any Card To Start"
+        setPlayGroundHeading("Pick Up Any Card To Start")
         addHoverClass()
 
     }
@@ -85,12 +81,12 @@ function Home()
 
                 // countdown for 3 seconds
                 let count=3;
-                let countdown=document.getElementById('play-ground-heading')
                 let countinterval=setInterval(function()
                 {
                     if (count>=0)
                     {
-                        countdown.innerText=count--;  
+
+                        setPlayGroundHeading(count--)
                     }
 
                     else{
@@ -103,19 +99,20 @@ function Home()
                         Swap();
                     }
                 },1000)}
+
             else if(Choose_card){
                 console.log('dam')
                 console.log(player_choice)
                 console.log(whichclicked.currentTarget.id);
-                let countdown=document.getElementById('play-ground-heading')
  
                 if(player_choice ==  whichclicked.currentTarget.id)
                 {
-                    countdown.innerText="<><><><><> YOU'VE WON <><><><>";   
+                    setPlayGroundHeading("<><><><> YOU'VE WON <><><><>")
                 }
                 else{
-                    countdown.innerText="<><><><><> YOU'VE WEAK EYES <><><><>";  
+                    setPlayGroundHeading("<><><><> YOU'VE WEAK EYES <><><><>")
                 }
+
                 Show_Cards();
                 setTimeout(
                     function()
@@ -150,8 +147,7 @@ function Home()
         }
         function Swap()
         {
-            let countdown=document.getElementById('play-ground-heading')
-             countdown.innerText="Watch Your Choosen Card Carefully -><- ";
+            setPlayGroundHeading('Watch Your Choosen Card Carefully -><- ')
 
             let no1=Get_Random();
             let no2=Get_Random();
@@ -229,7 +225,7 @@ function Home()
             if(!count)
             {
                 let ele;
-                countdown.innerText="Click On Your Card (;";    
+                setPlayGroundHeading("Click On Your Card (;")   
                for(let i=0;i<arr.length;i++)
                {
                     ele=document.getElementById(arr[i])
@@ -270,7 +266,7 @@ function Home()
                 <div className="container-fluid mt-5 h-100">
                     <div className="row parentplus">
                         <div className="col-12 text-center mt-5">
-                            <h3 id='play-ground-heading' >Pick Up Any Card To Start </h3>
+                            <h3 id='play-ground-heading' >{playGroundHeading}</h3>
                             {playagain?<buttom onClick={PlayAgain}><i class="bi bi-arrow-clockwise"></i></buttom>:''}
                         </div>
                         <div className="col-12 text-center mt-3">
