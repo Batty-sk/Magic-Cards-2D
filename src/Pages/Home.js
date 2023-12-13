@@ -124,13 +124,12 @@ function Home()
                 },1000)}
 
             else if(Choose_card){
-                console.log('dam')
                 console.log(player_choice)
                 console.log(whichclicked.currentTarget.id);
  
                 if(player_choice ==  whichclicked.currentTarget.id)
                 {
-                    setPlayGroundHeading("<><><><> YOU'VE WON <><><><>")
+                    setPlayGroundHeading("<><><><> G.O.A.T <><><><>")
                     Celebration()
                     audioRef.current.play();
                 }
